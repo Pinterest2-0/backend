@@ -4,8 +4,8 @@ const server = express()
 
 server.use(express.json())
 
-server.get('/', (req, res, next) => {
-    res.status(200).json({ message: 'Server is working!' })
+server.get('/', (req, res) => {
+    res.send( `<h2>Server is working!</h2>` )
 })
 
 module.exports = server;

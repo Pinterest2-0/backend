@@ -4,7 +4,7 @@ exports.up = function(knex) {
   .createTable('articles', tbl => {
       tbl.increments()
       tbl.text('title', 128).notNullable()
-      tbl.text('cover', 255)
+      tbl.text('category', 128)
       tbl.text('link', 255).notNullable()
       tbl.text('description', 255)
   })

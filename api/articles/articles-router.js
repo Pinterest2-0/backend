@@ -39,8 +39,8 @@ router.put('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-    Article.delete(req.param.id)
-    .then( res.status(200) )
+    Article.remove(req.params.id)
+    .then( removed => removed ?  res.json(removed) : res.status(404) )
     .catch( err => {
         console.log(err)
         res.status(500).json({ message: 'Could delete specific article' })

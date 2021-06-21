@@ -1,15 +1,15 @@
 const db = require('../../data/db-config')
 const { getById } = require('../articles/articles-model')
 
-const getAll = () => {
+const findAll = () => {
     return db("users")
 }
 
-const getBy = (filter) => {
+const findBy = (filter) => {
     return db("users").where(filter)
 }
 
-const getById = (id) => {
+const findById = (id) => {
     return db("users").where({id}).first()
 }
 
@@ -19,8 +19,8 @@ const add = async (user) => {
 }
 
 module.exports = {
-    getAll,
-    getBy,
-    getById,
+    findAll,
+    findBy,
+    findById,
     add
 }

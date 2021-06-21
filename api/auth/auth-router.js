@@ -6,13 +6,13 @@ const Users = require('./auth-model')
 
 router.post('/register', (req, res) => {
     const user = req.body
-    const rounds = process.env.ROUNDS || 8
-    const hash = bcrypt.hashSync(user.password , rounds)
+    // const rounds = process.env.ROUNDS || 8
+    const hash = bcrypt.hashSync(user.password ,8)
 
     user.password = hash
 
     Users.add(user)
-    .then( saved => res.status(201).json(saved) )
+    .then( saved => res.status(200).json(req.body) )
     .catch( err => {
         console.log(err)
         res.status(500).json({ messgae: "Could not register user" })
@@ -20,10 +20,10 @@ router.post('/register', (req, res) => {
 
 })
 
-router.post('/', (req, res) => {
+router.post('/login', (req, res) => {
     const { username , password  } = req.body
 
-    Users.getBy({username})
+    Users.findBy({username})
     .then(([user]) => {
         if (user && bcrypt.compareSync( password , user.password )) {
             const token = generateToken(user)

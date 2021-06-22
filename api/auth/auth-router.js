@@ -2,9 +2,10 @@ const router = require('express').Router()
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const {jwtSecret}  = require('../../config/secret')
+const {checkCredentials} = require('./auth-middleware')
 const Users = require('./auth-model')
 
-router.post('/register', (req, res) => {
+router.post('/register', checkCredentials, (req, res) => {
     const user = req.body
     // const rounds = process.env.ROUNDS || 8
     const hash = bcrypt.hashSync(user.password ,8)
@@ -20,7 +21,7 @@ router.post('/register', (req, res) => {
 
 })
 
-router.post('/login', (req, res) => {
+router.post('/login', checkCredentials, (req, res) => {
     const { username , password  } = req.body
 
     Users.findBy({username})

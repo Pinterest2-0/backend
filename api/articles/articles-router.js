@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const Article = require('./articles-model')
-
+const {validateArticle , checkArticleId} = require('./articles-middleware')
 router.get('/', (req, res) => {
     Article.getAll()
     .then( articles => res.status(200).json(articles) )
@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
     } )
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', checkArticleId, (req, res) => {
     const { id } = req.params
     Article.getById(id)
     .then( article => res.status(200).json(article) )
@@ -20,7 +20,7 @@ router.get('/:id', (req, res) => {
     } )
 })
 
-router.post('/', (req, res) => {
+router.post('/', validateArticle, (req, res) => {
     Article.insert(req.body)
     .then( newArticle => res.status(201).json(newArticle) )
     .catch( err => {
@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
     } )
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', checkArticleId , validateArticle, (req, res) => {
     Article.update(req.params.id , req.body)
     .then( updatedArticle => res.status(200).json(updatedArticle) )
     .catch( err => {
@@ -38,7 +38,7 @@ router.put('/:id', (req, res) => {
     } )
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', checkArticleId, (req, res) => {
     Article.remove(req.params.id)
     .then( removed => removed ?  res.json(req.body) : res.status(404) )
     .catch( err => {

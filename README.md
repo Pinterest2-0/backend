@@ -29,3 +29,14 @@ https://pintereachunit4.herokuapp.com/api/auth/register
 
 LOGIN (EXISTING USER) "${base}api/auth/login" 
 https://pintereachunit4.herokuapp.com/api/auth/login
+
+GET (All Saved Articles) "${base}api/saved"
+https://pintereachunit4.herokuapp.com/api/saved
+
+
+GET (Specific Saved Article) "${base}api/saved/:id"
+https://pintereachunit4.herokuapp.com/api/saved/:id
+
+
+POST (Add Saved Article) "${base}api/saved" + article_id && user_id
+https://pintereachunit4.herokuapp.com/api/saved

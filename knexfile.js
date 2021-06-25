@@ -20,6 +20,10 @@ module.exports = {
     ...sharedConfig,
     connection: { filename: './data/pintereach.db3' },
   },
+  testing: {
+    ...sharedConfig,
+    connection: { filename: './data/pintereach.db3' },
+  },
   production: {
     ...sharedConfig,
     connection: { filename: './data/pintereach.db3' },

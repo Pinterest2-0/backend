@@ -2,10 +2,10 @@ const router = require('express').Router()
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const {jwtSecret}  = require('../../config/secret')
-const {checkCredentials} = require('./auth-middleware')
+const {checkCredentials , checkUsernameExists} = require('./auth-middleware')
 const Users = require('./auth-model')
 
-router.post('/register', checkCredentials, (req, res) => {
+router.post('/register', checkCredentials, checkUsernameExists, (req, res) => {
     const user = req.body
     // const rounds = process.env.ROUNDS || 8
     const hash = bcrypt.hashSync(user.password ,8)
@@ -16,12 +16,12 @@ router.post('/register', checkCredentials, (req, res) => {
     .then( saved => res.status(200).json(req.body) )
     .catch( err => {
         console.log(err)
-        res.status(500).json({ messgae: "Could not register user" })
+        res.status(500).json({ message: "Could not register user" })
     } )
 
 })
 
-router.post('/login', checkCredentials, (req, res) => {
+router.post('/login', checkCredentials,  (req, res) => {
     const { username , password  } = req.body
 
     Users.findBy({username})

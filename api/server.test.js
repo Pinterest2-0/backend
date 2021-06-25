@@ -23,7 +23,7 @@ describe('server.js', () => {
                 username: "The Hulk",
                 password: "SMASH!"
             })
-            expect(await Users.findAll()).toHaveLength(1)
+            expect(await Users.findAll()).toHaveLength(7)
         })
 
         it('sends error message if username is taken', async () => {

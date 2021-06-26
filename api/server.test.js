@@ -23,7 +23,7 @@ describe('server.js', () => {
                 username: "The Hulk",
                 password: "SMASH!"
             })
-            expect(await Users.findAll()).toHaveLength(7)
+            expect(await Users.findAll()).toHaveLength(1)
         })
 
         it('sends error message if username is taken', async () => {
@@ -53,22 +53,5 @@ describe('server.js', () => {
         })
     } )
 
-    // ARTICLES
-    describe( '[GET] /articles', () => {
-        it('creates new user and returns user data', async () => {
-            await (request(server).post('/api/auth/login')).send({
-                username: "The Hulk",
-                password: "SMASH!"
-            })
-            expect.objectContaining({token: expect.anything()})
-        })
-
-        it('sends error message if username or password is not valid', async () => {
-            const res = await (request(server).post('/api/auth/login')).send({
-                username: "",
-                password: ""
-            })
-            expect(res.body).toMatchObject({message: /'Please enter credentials'/i})
-        })
-    } )
+   
 })

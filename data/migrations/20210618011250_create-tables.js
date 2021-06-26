@@ -40,6 +40,7 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   return knex.schema
+    .dropTableIfExists('saved_articles')
     .dropTableIfExists('users')
     .dropTableIfExists('articles')
 };

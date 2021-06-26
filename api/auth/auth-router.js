@@ -5,7 +5,7 @@ const {jwtSecret}  = require('../../config/secret')
 const {checkCredentials , checkUsernameExists} = require('./auth-middleware')
 const Users = require('./auth-model')
 
-router.post('/register', checkCredentials, checkUsernameExists, (req, res) => {
+router.post('/register', (req, res) => {
     const user = req.body
     // const rounds = process.env.ROUNDS || 8
     const hash = bcrypt.hashSync(user.password ,8)
@@ -21,7 +21,7 @@ router.post('/register', checkCredentials, checkUsernameExists, (req, res) => {
 
 })
 
-router.post('/login', checkCredentials,  (req, res) => {
+router.post('/login',  (req, res) => {
     const { username , password  } = req.body
 
     Users.findBy({username})

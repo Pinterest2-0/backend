@@ -4,8 +4,8 @@ const getAll = () => {
     return db('articles')
 }
 
-const getById = (id) => {
-    return db('articles').where({id}).first()
+const getById = (article_id) => {
+    return db('articles').where({article_id}).first()
 }
 
 const getByCat = (category) => {
@@ -17,14 +17,14 @@ const insert = async (article) => {
     return getById(id)
 }
 
-const update = async (id , changes) => {
-    await db('articles').where({id}).update(changes)
+const update = async (article_id , changes) => {
+    await db('articles').where({article_id}).update(changes)
 
     return getById(id)
 }
 
-const remove = (id) => {
-    return db('articles').where({id}).del()
+const remove = (article_id) => {
+    return db('articles').where({article_id}).del()
 }
 
 module.exports = {

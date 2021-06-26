@@ -9,8 +9,8 @@ const findBy = (filter) => {
     return db("users").where(filter)
 }
 
-const findById = (id) => {
-    return db("users").where({id}).first()
+const findById = (user_id) => {
+    return db("users").where({user_id}).first()
 }
 
 const add = async (user) => {

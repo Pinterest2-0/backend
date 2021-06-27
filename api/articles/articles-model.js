@@ -20,7 +20,7 @@ const insert = async (article) => {
 const update = async (article_id , changes) => {
     await db('articles').where({article_id}).update(changes)
 
-    return getById(id)
+    return getById(article_id)
 }
 
 const remove = (article_id) => {
